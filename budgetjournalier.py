@@ -1,0 +1,64 @@
+def calculateur_budget_journalier():
+
+    depenses = []
+    
+    depenses_par_categorie = {}
+    
+    print("CALCULATEUR DE BUDGET JOURNALIER")
+    print("Entrez vos dépenses (ex: 15.50 nourriture). Tapez 'stop' pour terminer.")
+
+    while True:
+        entree = input("\nEntrez une dépense et sa catégorie (ex: 20 transport) ou 'stop' : ").strip().lower()
+
+        if entree == 'stop':
+            break
+
+        try:
+            
+            parties = entree.split(maxsplit=1)
+            if len(parties) < 2:
+                print("Format invalide. Utilisez 'montant catégorie' (ex: 20 transport).")
+                continue
+                
+            montant = float(parties[0].replace(',', '.'))
+            categorie = parties[1].capitalize()
+
+            if montant <= 0:
+                print("Le montant doit être positif.")
+                continue
+
+            
+            depenses.append(montant)
+
+            
+            if categorie in depenses_par_categorie:
+                depenses_par_categorie[categorie] += montant
+            else:
+                depenses_par_categorie[categorie] = montant
+
+        except ValueError:
+            print("Erreur : Veuillez entrer un montant numérique valide.")
+            continue
+
+    
+    if depenses:
+        total_depenses = sum(depenses)
+        nombre_depenses = len(depenses)
+        moyenne_depenses = total_depenses / nombre_depenses
+
+        print("\n#### **Résumé des dépenses :**")
+        print(f"Total des dépenses : **{total_depenses:,.2f}**")
+        print(f"Dépense moyenne : **{moyenne_depenses:,.2f}**")
+
+        
+        if depenses_par_categorie:
+            categorie_max = max(depenses_par_categorie, key=depenses_par_categorie.get)
+            montant_max = depenses_par_categorie[categorie_max]
+            print(f"Catégorie la plus coûteuse : **{categorie_max}** ({montant_max:,.2f})")
+
+    else:
+        print("\n**Aucune dépense enregistrée** pour la journée.")
+
+# Exécuter le programme
+if __name__ == "__main__":
+    calculateur_budget_journalier()
