@@ -4,7 +4,7 @@ def calculateur_budget_journalier():
     # Dictionnaire pour le bonus (catégorie la plus coûteuse)
     depenses_par_categorie = {}
     
-    print("CALCULATEUR DE BUDGET JOURNALIER")
+    print("CALCULATEUR DE BUDGET JOURNALIER de")
     print("Entrez vos dépenses (ex: 15.50 nourriture). Tapez 'stop' pour terminer.")
 
     while True:
